@@ -27,8 +27,8 @@ genform["alloc"][ljs] = { "balance": str(8 * 10 ** 18) }
 
 # clique for PoA
 genform["config"]["clique"] = {}
-genform["config"]["clique"]["period"] = 5
-genform["config"]["clique"]["epoch"] = 30000
+genform["config"]["clique"]["period"] = 5      # Minimum difference between two consecutive block’s timestamps
+genform["config"]["clique"]["epoch"] = 30000   # Number of blocks after which to checkpoint and reset the pending votes
 
 # extra data for PoA
 print("If done, type x")
