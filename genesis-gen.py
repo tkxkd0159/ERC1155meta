@@ -1,8 +1,10 @@
+# SIGNER_LIMIT: Number of consecutive blocks out of which a signer may only sign one
+# Must be floor(SIGNER_COUNT / 2) + 1 to enforce majority consensus on a chain.
 import json
 
-myauth = "be590efffcf1068a75817d2dade94a24dccf0fd8"
-mysub = "57bc9febbf1aae3492b5d1a5a70f7bd80ee302d9"
-ljs = "3ef78933405Df49C794Be1E8E6Bb5C2b94CA6201"
+user1 = "909e35Ad26acAda51609C23774D6267F8aFf6d36"
+user2 = "5Ac345fFa4B4eF9634DB94a3Ac493c24E57b5DF5"
+user3 = "4d929B0E7e7246Bb540Fb3175b1202Fb6D0B53C2"
 
 genform = {}
 
@@ -21,9 +23,9 @@ genform["difficulty"] = "1"
 genform["gasLimit"] = "8000000"
 
 genform["alloc"] = {}
-genform["alloc"][myauth] = { "balance": str(1000 * 10 ** 18) }
-genform["alloc"][mysub] = { "balance": str(1 * 10 ** 18) }
-genform["alloc"][ljs] = { "balance": str(8 * 10 ** 18) }
+genform["alloc"][user1] = { "balance": str(1000 * 10 ** 18) }
+genform["alloc"][user2] = { "balance": str(33 * 10 ** 18) }
+genform["alloc"][user3] = { "balance": str(8 * 10 ** 18) }
 
 # clique for PoA
 genform["config"]["clique"] = {}
@@ -32,7 +34,7 @@ genform["config"]["clique"]["epoch"] = 30000   # Number of blocks after which to
 
 # extra data for PoA
 print("If done, type x")
-extradata = '0x' + '0' * 64 + myauth + psj
+extradata = '0x' + '0' * 64 + user1 + user2 + user3
 
 while True:
     newacc = input("Enter your Auth_account >>> If done, type X \n")
@@ -44,7 +46,7 @@ while True:
     extradata += newacc
 
 
-with open("genesis-new.json", 'w') as f:
+with open("genesis.json", 'w') as f:
     json.dump(genform, f)
 
-print("saved as 'genesis-new.json'")
+print("saved as 'genesis.json'")
